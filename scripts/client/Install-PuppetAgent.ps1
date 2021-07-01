@@ -48,6 +48,14 @@
 
 .PARAMETER AgentPassword
     Password for the agent's user account.
+
+.EXAMPLE
+    PS C:\> .\Install-PuppetAgent.ps1 -AgentPassword password1234
+    Install the latest Puppet agent on the local system.
+
+.EXAMPLE
+    PS C:\> .\Install-PuppetAgent.ps1 -AgentPassword password1234 -Environment development
+    Install a version 7.8.0 Puppet agent, and set the default environment for the node to 'development'.
 #>
 
 param (

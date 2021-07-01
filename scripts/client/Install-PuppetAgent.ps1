@@ -13,6 +13,10 @@ param (
     [string]
     $DownloadPath = "$env:TEMP",
 
+    [ValidateScript({ Test-Path -Path $_ })]
+    [string]
+    $LogPath,
+
     [string]
     $PuppetServer = 'puppet',
 
@@ -54,6 +58,12 @@ $ExecParams = @{
     ArgumentList = '/qn', '/norestart', '/i', "'$MsiFilePath'"
     Wait = $true
     NoNewWindow = $true
+}
+
+if ($PSBoundParameters.ContainsKey('LogPath')) {
+    $LogFilePath = "$LogPath\puppet-install-$(Get-Date -Format FileDateTime).txt"
+    $LogArguments = '/l*', "'$LogFilePath'"
+    $ExecParams.ArgumentList += $LogArguments
 }
 
 $InstallProperties = @(

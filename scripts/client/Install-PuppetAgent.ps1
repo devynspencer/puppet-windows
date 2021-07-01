@@ -1,3 +1,55 @@
+<#
+.SYNOPSIS
+    Install the Puppet agent on a Windows host.
+
+.DESCRIPTION
+    Install the Puppet agent on a Windows host using msiexec. Can supply values for basic agent settings.
+
+.PARAMETER Version
+    Version of Puppet agent to install. Defaults to 'latest'.
+
+.PARAMETER Architecture
+    Processor architecture of agent to install. Defaults to 'x64'.
+
+.PARAMETER Destination
+    Location to use for Puppet agent install. Defaults to 'C:\Program Files\Puppet Labs\Puppet'
+
+.PARAMETER DownloadPath
+    Directory to download Puppet agent installer to. Defaults to '~\AppData\Local\Temp.
+
+.PARAMETER LogPath
+    Directory to write installation logs to.
+
+.PARAMETER PuppetServer
+    Hostname or fqdn of the primary Puppet server can be reached. Defaults to 'puppet'.
+
+.PARAMETER CertificateAuthority
+    Hostname or fqdn of the CA server. Defaults to 'puppet'.
+
+.PARAMETER NodeName
+    Node's certificate name, and the name it uses when requesting catalogs. Defaults to the value of `fqdn` from facter.
+
+    For best compatibility, limit the value of certname to lowercase letters, numbers, periods, underscores, and dashes.
+
+.PARAMETER Environment
+    Node environment. Defaults to 'production'.
+
+    Note: If a value for the environment variable already exists in puppet.conf, specifying it during installation does not override that value.
+
+.PARAMETER AgentAccount
+    Windows user account the agent service uses. Defaults to 'LocalSystem'.
+
+    This property is useful if the agent needs to access files on UNC shares, because the default LocalService account can't access these network resources.
+
+    The user account must already exist, and can be either a local or domain user. The installer allows domain users even if they have not accessed the machine before. The installer grants Logon as Service to the user, and if the user isn't already a local administrator, the installer adds it to the Administrators group.
+
+.PARAMETER AgentDomain
+    Domain of the agent's user account.
+
+.PARAMETER AgentPassword
+    Password for the agent's user account.
+#>
+
 param (
     [string]
     $Version = 'latest',

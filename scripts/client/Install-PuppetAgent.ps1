@@ -8,9 +8,6 @@
 .PARAMETER Version
     Version of Puppet agent to install. Defaults to 'latest'.
 
-.PARAMETER Architecture
-    Processor architecture of agent to install. Defaults to 'x64'.
-
 .PARAMETER Destination
     Location to use for Puppet agent install. Defaults to 'C:\Program Files\Puppet Labs\Puppet'
 
@@ -62,10 +59,6 @@ param (
     [string]
     $Version = 'latest',
 
-    [ValidateSet('x64', 'x86')]
-    [string]
-    $Architecture = 'x64',
-
     [string]
     $Destination = "$env:ProgramFiles\Puppet Labs\Puppet",
 
@@ -103,7 +96,7 @@ param (
 # Skipping pipeline structure until remote install parameter set is added
 
 if ($Version -eq 'latest') {
-    $AgentFileUri = "http://downloads.puppetlabs.com/windows/puppet/puppet-agent-$Architecture-latest.msi"
+    $AgentFileUri = "http://downloads.puppetlabs.com/windows/puppet/puppet-agent-x64.msi"
 }
 
 else {

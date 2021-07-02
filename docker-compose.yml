@@ -5,6 +5,8 @@ services:
     image: puppet/puppetserver
     env_file: env/puppet.env
     restart: always
+    volumes:
+      - ./environments:/etc/puppetlabs/code/environments
     ports:
       - 8140:8140
 
